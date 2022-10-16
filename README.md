@@ -1,7 +1,74 @@
-# ToDo
+---
+title: "월별 목표 정리"
 
-개인 Todo리스트 레포입니다.
+categories:
+  - Todo
+ 
+date: 2022-10-16
+---
 
-22-10-16부로 issue에 Todo 작성 예정입니다.
+# 중요일정
 
-그전까지 리스트는 todolist에 들어있습니다.
+격주 월요일 11시 멘토링
+
+매주 월, 목 오후 9시 체리케이크 회의
+
+매주 화요일 오후 11시 자만추 회의
+
+격주 토요일 브릿지 오후 2시 총회
+
+모각코 매주 토요일 10시 30분
+
+## 10월 목표  
+
+1. 프로젝트 원만 하게 진행 (체리, 노스텔지어)
+2. 공모전여러개 조사
+3. 42서울 종료에 따른 대책 수단 알아보기
+4. 조급해 하지 말자
+5. 내년 멘토링 신청(https://www.hanium.or.kr/portal/index.do)
+
+---
+
+## 마인드
+
+블로그에 글을 쓸 때는 남에게 보여주는 식으로 자신의 생각을 정리할 것
+개발을 하거나 정리하기 앞서 단계나 순서를 정리할 것
+유니티 공부를 한다고 한다면 최우선으로 unity docs 찾아보기
+자꾸자꾸 인디게임 페스티벌이나 자극 받을 만한 것에 참가하기
+스터디, 공모전, 페스티벌, 모임 등..
+매주 인디터 카페가서 자극을 받자
+
+부지런하게 멘토링 받자
+2주치 작업을 세분화
+
+https://yunbam.tistory.com/30
+- 인디게임 개발 관련(여기서 동기부여를 받자)
+
+---
+
+## 포스팅 주제관련  
+
+1. 플레이어 컨트롤러(멘토링 받고 포스팅할 것)
+2. sendMessage, BroadcastMessage
+3. tostring메서드 overrding
+4. Gizmos 관련 - 전처리 기능으로 감싸기(즉, 에디터에서 만)
+5. spine animation handler
+
+## 공부 주제
+
+1순위 : 스크립팅 마스터
+2순위 : 게임 프로그래밍 패턴
+3순위 : `c#` 관련 책
+
+UI부분 공부 시작해야 할 듯
+
+`포커스 세션` 사용하기
+
+https://opengameart.org/
+사운드
+
+https://rito15.github.io/posts/unity-memo-useful-links/
+
+https://www.csharpstudy.com/Story/Index
+
+https://github.com/Unity-Technologies/ProjectTinySamples
