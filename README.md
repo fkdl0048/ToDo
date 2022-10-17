@@ -63,18 +63,9 @@ https://github.com/Unity-Technologies/ProjectTinySamples
 ## 멘토링 정리
 
 <details>
-### <summary>10/03 멘토링</summary>
+<summary>10/03 멘토링</summary>
 <div markdown="1">
-
-안녕
-
-</div>
-</details>
-
-### 10/03 멘토링
-
-멘토링 진행에 대해 지속적으로 얘기하면서 해보고 싶다
-
+ 
 일정 정리 기법에 대한 체크
 -> 완료 조건을 적어야 한다.
 
@@ -87,8 +78,16 @@ https://github.com/Unity-Technologies/ProjectTinySamples
 블로그 글과 to do list 관리하는 걸 분리해서 to do list를 issues 쪽에 따로 적어 보는 걸 추천
 
 프로젝트 repository는 private이므로 새롭게 public repository를 생성하고 거기서 discussions를 통해 멘토링 기록 및 질문/답변 진행하는 방식으로 진행
+  
+멘토링 진행에 대해 지속적으로 얘기하면서 해보고 싶다
 
-### 10/17일 멘토링  
+</div>
+</details>
+
+<details>
+<summary>10/17일 멘토링 </summary>
+<div markdown="1">
+
 자만추 - json 파일로 파싱 생각해보가(class로 관리된다면 json파일로 관리하는게 좋아보임)  
 
 project 보드 공부 - 이슈를 프로젝트를 링크로 연결  
@@ -102,3 +101,6 @@ project 보드 공부 - 이슈를 프로젝트를 링크로 연결
 
 코드에 응집도 와 결합도  
 코드를 리펙토링한다면 응집도, 결합도를 생각해서 
+  
+</div>
+</details>
