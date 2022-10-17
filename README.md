@@ -63,7 +63,7 @@ https://github.com/Unity-Technologies/ProjectTinySamples
 ## 멘토링 정리
 
 <details>
-<summary>### 10/03 멘토링</summary>
+### <summary>10/03 멘토링</summary>
 <div markdown="1">
 
 안녕
