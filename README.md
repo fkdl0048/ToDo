@@ -62,6 +62,15 @@ https://github.com/Unity-Technologies/ProjectTinySamples
 
 ## 멘토링 정리
 
+<details>
+<summary>### 10/03 멘토링</summary>
+<div markdown="1">
+
+안녕
+
+</div>
+</details>
+
 ### 10/03 멘토링
 
 멘토링 진행에 대해 지속적으로 얘기하면서 해보고 싶다
