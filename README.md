@@ -108,3 +108,28 @@ project 보드 공부 - 이슈를 프로젝트를 링크로 연결
   
 </div>
 </details>
+
+
+<details>
+<summary>10/31일 멘토링 </summary>
+<div markdown="1">
+
+팀 프로젝트를 진행하면서 목표를 설정함에 있어서 근본적인 이해가 필요하다.  
+프로젝트뿐만 아니라 일상적인 생활에서도 `이해`가 필요하다.  
+
+2주 작업이 끝나고 빌드를 해본 뒤 리뷰해보는 시간이 필요..!  
+
+기업에서 사용하는 방법인 데브옵스, CICD기술을 사용함  
+
+> 데브옵스(DevOps)는 소프트웨어의 개발(Development)과 운영(Operations)의 합성어  
+
+즉, 어느 정도 애자일 방식을 띄고 있다.  
+
+Unity에서 jsonUtily의 기능은 array를 인식하지 못하기 때문에 클래스로 한번 더 매핑을 해줘야 한다.  
+
+githun action에 대해서 알아보자
+
+unity에서 지원하는 Smart merge는 같은 씬의 충돌을 어느정도 막아준다.
+
+</div>
+</details>
