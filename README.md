@@ -41,11 +41,12 @@ https://yunbam.tistory.com/30
 
 ## 포스팅 주제관련  
 
-1. 플레이어 컨트롤러(멘토링 받고 포스팅할 것)
 2. sendMessage, BroadcastMessage
 3. tostring메서드 overrding
 4. Gizmos 관련 - 전처리 기능으로 감싸기(즉, 에디터에서 만)
 5. spine animation handler
+6. Editor  
+7. 리플랙션 
 
 ## 공부 주제
 
