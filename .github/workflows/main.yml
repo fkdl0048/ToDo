@@ -1,7 +1,7 @@
 # .github/workflows/issue-on-push.yml
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 9 * * *'
 
 name: Create an issue on push
 permissions:
