@@ -1,5 +1,5 @@
 ---
-title: todolist {{ date | date('dddd, MMMM Do') }}
+title: todolist {{ date | date('YYYY[년] M[월] D[일]') }}
 assignees: fkdl0048
 labels: todo
 ---
