@@ -4,7 +4,7 @@ about: Describe this issue template's purpose here.
 title: "[TEST]"
 labels: todo
 assignees: fkdl0048
-milestones: 2023
+milestone: 2023
 
 ---
 
