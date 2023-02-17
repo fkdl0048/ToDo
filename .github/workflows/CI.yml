@@ -1,7 +1,9 @@
+name: Comment when opened
+
 on:
-  create:
+  issues:
     types:
-      - issues
+      - opened
 
 jobs:
   label_issue:
