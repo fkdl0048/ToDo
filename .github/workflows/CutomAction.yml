@@ -6,14 +6,15 @@ on:
       - opened
 
 jobs:
-  label_issue:
+  project_issue:
     runs-on: ubuntu-latest
     steps:
       - env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
-      - run: |
-          gh issue edit $ISSUE_URL --add-project "Todo" 
-          gh issue edit $ISSUE_URL --milestone "2023"
+      - name: projectAdding
+        run: gh issue edit $ISSUE_URL --add-project "Todo"
+      - name: milestionAdding
+        run: gh issue edit $ISSUE_URL --milestone "2023"
           
         
