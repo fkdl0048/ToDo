@@ -1,4 +1,4 @@
-name: Comment when opened
+name: issue_Add_Project
 
 on:
   issues:
@@ -13,4 +13,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
         run: |
-          gh issue edit $ISSUE_URL --add-label "StudyList"
+          gh issue edit $ISSUE_URL --add-project "Todo"
