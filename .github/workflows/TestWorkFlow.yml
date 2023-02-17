@@ -1,7 +1,7 @@
 name: TestWorkFlow
 on:
   discussion:
-    types: answered
+    types: [answered, created]
 jobs:
   echo:
     runs-on: ububtu-latest
