@@ -5,7 +5,8 @@ labels: todo
 ---
 
 1. 미디엄에서 글 30분 읽기 (필요에 따라 정리)
-2. 하루 일정 시작할 때 TODO에서 해야하는 Task In progress로 이동시켜두기 해당 내용 ToDo생성되면 바인딩
+2. 하루 일정 시작할 때 TODO에서 해야하는 Task `In progress`로 이동시켜두기 해당 내용 ToDo생성되면 바인딩
+3. 급한 순서는 `In progress`참고
 
 ## TODO  
 
