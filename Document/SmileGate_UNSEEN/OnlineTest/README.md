@@ -54,6 +54,8 @@ TEST는 **객관식**, **주관식** 혼합 유형이며, 아래 출제 범위�
 
 나의 경우엔  C++, 언리얼, 수학 3개가 많이 약할 것 같다.
 
+우선 내가 생각하는 기준으로 공부 후 다른 글들을 참고하여 채워넣을 생각
+
 대부분 정리되어 있는 글들을 참고하였다.
 
 - [나는 뉴비다 개발자편](https://dev-nicitis.tistory.com/)
@@ -185,6 +187,8 @@ TEST는 **객관식**, **주관식** 혼합 유형이며, 아래 출제 범위�
 내 생각엔 가장 부족한 부분..
 
 대략적인 흐름을 이해하고, `C#`과 차이를 통해 이해하고자 함.
+
+- 궁금한 부분 [강의](https://www.youtube.com/watch?v=BL0qzWC8I24&list=PLMcUoebWMS1nzhlx-NbD4KBGEP1UCUDF_&index=29)로 학습
 
 #### C++ 특징
 
@@ -1624,4 +1628,302 @@ std::unordered_map에서 사용되는 자료구조는 해시맵 또는 해시테
 대략적인 내용은 알지만, 문제로 나온다면 다시 공부해야 할 것 같다.
 
 #### A* 길찾기
+
+다양한 길 찾기 알고리즘 중 가장 대중적인 길찾기 알고리즘
+
+*요즘 강곽 받는 JPS가 있다.*
+
+- 특징
+  - A* 알고리즘은 시작 노드만을 지정해 다른 모든 노드에 대한 최단 경로를 파악하는 다익스트라 알고리즘과 다르게 **시작 노드와 목적지 노드**를 분명하게 지정해 이 두 노드 간의 최단 경로를 파악할 수 있습니다.
+  - 휴리스틱 추정값을 통해 알고리즘을 개선 (값에 따라 속도가 결정)
+
+[가장 이해가 잘 된 블로그 글](http://www.gisdeveloper.co.kr/?p=3897)
+
+##### 중요 포인트
+
+- 다익스트라 알고리즘의 원리를 차용한 것
+- A*가 사용되는 이유는 다익스트라는 현실에 적용하기 매우 부담되기에
+- A* 알고리즘을 너비 우선 탐색의 한 예
+
+##### 구현 포인트
+
+- A* 알고리즘은 현재 상태의 비용을 g(x)
+- 현재 상태에서 다음 상태로 이동할 때의 휴리스틱 함수를 h(x)
+- g(x)와 h(x)를 더한 f(x)를 최소가 되는 지점으로 우선 탐색한다.
+- f(x)가 작은 값부터 탐색하는 특성상 우선순위 큐가 사용된다.
+- 휴리스틱 함수(추정거리 계산)은 유클리드 거리, 맨하탄 거리, 코사인 유사도 등이 있다.
+- 
+
+##### 수도 코드
+
+- f(x)를 오름차순 우선순위 큐에 노드로 삽입한다. (자동 정렬)
+- 우선순위 큐에서 최우선 노드를 pop한다.
+- 해당 노드에서 이동할 수 있는 노드를 찾는다. (열린 구간)
+- 그 노드들의 f(x)를 구한다.
+- 그 노드들을 우선순위 큐에 삽입한다. (열린 구간 추가)
+- 목표 노드에 도달할 때따지 반복한다.
+
+```c++
+PQ.push(start_node, g(start_node) + h(start_node))       //우선순위 큐에 시작 노드를 삽입한다.
+
+while PQ is not empty       //우선순위 큐가 비어있지 않은 동안
+    node = PQ.pop       //우선순위 큐를 pop한다.
+
+    if node == goal_node       //만일 해당 노드가 목표 노드이면 반복문을 빠져나온다. 기저사례
+        break
+
+    for next_node in (next_node_begin...next_node_end)       //해당 노드에서 이동할 수 있는 다음 노드들을 보는 동안
+        PQ.push(next_node, g(node) + cost + h(next_node))       //우선순위 큐에 다음 노드를 삽입한다.
+
+print goal_node_dist       //시작 노드에서 목표 노드까지의 거리를 출력한다.
+```
+
+##### 실제 코드
+
+```c++
+using ii = pair<int, int>;
+
+priority_queue<ii, vector<ii>, greater<ii> > pq;
+/// N_VER은 그래프의 정점의 개수를 의미한다.
+int dist[N_VER], cost[N_VER][N_VER]; /// dist[i]는 i번째 정점까지 가는 최단 거리를 의미한다.
+vector<ii> edges[N_VER]; /// edges[i]는 i와 연결된 정점과 가중치를 묶어 저장하는 벡터이다.
+
+int minDist(int src, int dst) {
+    pq.emplace(0, src);
+    bool success = false;
+    while (!pq.empty()) {
+        int v = pq.top(); pq.pop();
+        if (v == dst) {
+            success = true;
+            break;
+        }
+        for (ii& adj : edges[v]) {
+            if (dist[adj.first] < g(v) + adj.second + h(adj.first)) {
+                dist[adj.first] = g(v) + adj.second + h(adj.first); // 이완 (relaxation)
+                pq.emplace(dist[adj], adj); // 다음 정점 후보에 탐색하고 있는 정점을 넣는다.
+            }
+        }
+    }
+    if (!success) return -1;
+    else return dist[dst];
+}
+```
+
+##### 생각
+
+휴리스틱에 따라 값이 달라진다면 아마 가장 최악은 f(x)와 g(x)의 값이 같아지는 경우가 아닐까 싶다.
+
+그렇다면 노드들이 일렬로 늘어선 경우에는 최악의 성능을 보일 것이다.
+
+어느정도 방사형으로 뻗어나가는 경우에는 최적의 성능을 보일 것이다. (휴리스틱에 따라)
+
+스타크래프트도 A*를 사용한다고 한다.
+
+#### FSM
+
+가장 잘 정리된 [유튜브 영상](https://www.youtube.com/watch?v=lPAhyrudbVU) 참고
+
+유한 상태 기계로 게임 알고리즘 중 가장 유명하다.
+
+- 개발이 쉽고, 빠르게 구현할 수 있다.
+- 구성요소
+  - State: 상태
+  - Transition: 상태 전이
+  - Action: 상태 전이 시 수행할 동작
+
+##### 구현
+
+다양한 방법으로 가능 (if-else, enum & switch-case, **State 패턴**)
+
+대부분 State 패턴을 사용한다.
+
+```c++
+class FSMState
+{
+  virtual void onEnter();
+  virtual void onUpdate();
+  virtual void onExit();
+  list<FSMTransition> transitions;
+}
+```
+
+인터페이스 (추상클래스)로 각 State패턴에 맞게 동작할 행위, 전이 조건이 담긴 list를 가진다.
+
+```c++
+class FSMTransition
+{
+  virtual bool isVaild();
+  virtual FSMState* getNextState();
+  virtual void onTransition();
+}
+```
+
+전환 가능한지 여부, 다음 상태, 전이 시 수행할 동작을 가진다.
+
+```c++
+class FiniteStateMachine
+{
+  void update();
+  list<FSMState> states;
+  FSMState* initialState;
+  FSMState* activeState;
+}
+```
+
+Update를 통해 상태를 업데이트하고, 상태들을 가진다.
+
+- Update에서 현재 상태의 전이 조건에서 isVaild()인지 체크한다.(전이가 불가능하다면 현재 상태 Update)
+- Vaild하다면 현재 상태의 onExit()를 호출하고, Transition.getNexState()를 호출하여 다음 상태로 전이한다.
+- 현재 상태의 onEnter()를 호출한다.
+- 이후 다시 Update를 호출한다. (반복)
+
+##### 단점
+
+- 복잡한 상태를 표현하기 어렵다. (2~5개는 적당하지만, 30개라면..?)
+  - 전이의 단계가 기하급수로 증가할 가능성이 있음
+- 상태의 추가뿐만 아니라 error의 가능성이 높아짐
+- 이전 상태로 돌아가는 것이 어려움 (추가 구현이 필요)
+  - 해결방법으로 Hierarchy State Machine이 있다. (state machine을 계층적으로 나눔)
+  - 쉽게 state machine자체를 래퍼로 감싸서 한번더 추상화하는 방법
+  - H라는 History State를 사용하는 방법 (stack을 사용)
+
+##### 정리
+
+많은 장점과 단점이 같이 존재
+
+규모가 크지 않다면 사용하는걸 권장하지만 상태가 많아짐에 따라 엔트로피 증가
+
+HFSM으로 대부분 커버가 가능하다.
+
+##### 생각
+
+과거 체리플젝에서 보스, 몬스터, 플레이어의 상태를 FSM으로 관리했는데, 플레이어와 몬스터는 FSM형태로 작성되었지만, 코드 간의 의존성은 좋지 못한 상태로 관리되었다.
+
+보스에 가서는 좀 더 좋은 코드를 짜고 싶어서 Attack State를 한번 래핑하여 Pattern으로 구분하여 페이즈, 패턴에 맞게 호출되도록 짰는데 이게 HFSM인지 몰랐다.
+
+좋은 경험이였고, 좀 더 넓은 이해가 된 것 같다.
+
+#### Behavior Tree
+
+가장 잘 설명된 [영상](https://www.youtube.com/watch?v=nTtnKYNEGFE) 참고
+
+10년전부터 사용되고 있으며, 언리얼의 의사결정 시스템에도 BT가 사용되고 있다.
+
+이제는 대부분의 회사가 BT로 의사결정 시스템을 만든다.
+
+행동트리라고 부름
+
+FSM(finite state machine)은 State중심으로 결정했다면, BT는 행동중심으로 결정한다.
+
+##### 구성
+
+- 루트노드에서 시작, NPC의 개별 행동을 정의하는 behavior로 구성
+- 각각의 Behavior는 자식의 Behavior를 가질 수 있다. (tree구조)
+- Behavior는 다음을 정의
+  - Precondition: agent가 이 Behavior를 실행할 수 있는지 여부 (조건)
+  - Action: Behavior가 실행될 때 agent가 취할 행동
+- 알고리즘
+  - 루트노드에서 시작
+  - Behavior의 Precondition을 순서대로 체크 (왼쪽에서 오른쪽으로 DFS)
+    - 하나의 레벨에서 하나의 Behavior만 실행
+  - 선택된 Behavior의 자식 노드의 검사 (반복)
+  - 전체 순회를 마쳤을 때 선택된 노드 중 가장 우선순위가 높은 노드부터 순차적 실행
+
+##### 알고리즘
+
+- 루트 노드를 현재 노드로 설정
+- 현재 노드가 존재하는 동안 반복
+  - 현재 노드의 Precondition(조건)을 체크
+  - 만약 참이라면
+    - 그 노드를 실행 리스트에 추가
+    - 이후 그 노드에 자식 노드가 존재한다면 그 노드를 현재 노드로 설정 (반복)
+  - 거짓이라면
+    - 형제 노드로 이동
+
+##### 특징
+
+- 장점
+  - Simplicity: 특유의 단순함으로 구현이 쉽다.
+  - Stateless: 상태의 전환이 없으므로 전 상태에 대한 기억이 필요없다.
+  - Unware of each other: 각 Behavior는 서로에 대해 알 필요가 없다. (디커플링, 독립적)
+    - BT에서 Behavior를 추가하거나 삭제해도 다른 노드에 영향이 없다.
+    - FSM의 경우엔 다른 상태에 전환을 위해 다른 상태에 대한 정보를 알아야 한다.
+  - Extensibliity: 단순한 base알고리즘에서 시작해서 기능을 붙여나가면 된다.
+    - 부모 동작은 실행할 자식 중 하나를 선택하는 대신, 자식을 각각 차례대로 실행해야 하거나(sequence), 자식 중 하나를 임의로 선택하여 실행(select)하도록 지정가능
+      - Utility System-type selector 사용가능
+      - 게임 상황에 따른 event를 Precondition에 적용 -> fiexibility 제공
+  - 기타: 노드의 재사용, 시각화 툴 제작에 유리
+- 단점
+  - 매번 루트로부터 탐색: 실행시간이 FSM보다 길다.
+  - 단순 구현은 거대한 조건문을 양산하게 된다. (느려짐)
+  - 모든 Behavior에 대한 평가라는 구조 -> 하드웨어 성능 고려
+  - State가 없음으로 생길 수 있는 문제
+    - 루프가 발생할 수 있음
+  - 기타
+    - 행동 트리의 탐색 순서가 행동에 영향을 미친다. (우선순위-> 왼쪽에서 오른쪽으로 탐색)
+    - Selector의 자식 노드가 많을수록 AI의 의사결정이 지연될 수 있다.
+
+##### Utility System
+
+효용 경제학의 용어
+
+대부분의 AI Logic은 Boolean questions으로 이뤄져있다. (양극화)
+
+나는 적을 볼 수 있는가? yes or no
+```c++
+if (canSeeEnemy()) {
+  attack();
+}
+```
+
+하지만 실세계의 의사결정은 그렇지 않다. (복잡함, 수많은 가능성)
+
+고려해야 할 요소들이 매우 많음 (적이 얼마나 남았고, 탄약이 얼마나 있고, 내 상태는?)
+
+이러한 상황을 if case로 잡을 수 없음, 결과들이 단순히 할까, 말까로 결정되지 않음
+
+따라서 어떠한 행동을 할 가능성으로 형태가 적합 (확률)
+
+Utility System은 잠재적인 행동의 선호도를 결정한다. 고려사항에 대한 측정, 가중치, 결합, 비율, 우선순위, 정렬 등을 수행
+
+보통은 AI아키텍처의 전환논리가 필요할 때 사용, 전체 의사결정 엔진으로 구축할 수 있음
+
+- 수 많은 행동이 있는 게임
+- 한 가지 옳은 답이 없는 경우
+- 수 많은 경쟁적인 입력에 기반한 선호하는 행동의 선택
+
+이것은 "네가 해야할 유일한 액션"으로 귀결되지 않음
+
+취할 수 있는 가능한 옵션을 제공하는 형태
+
+대표적으로 심즈
+
+#### Quadtree
+
+[참고 블로그](https://joonyle99.github.io/datastructure_algorithm/DataStructure_Algorithm-Quadtree/)
+
+쿼드트리는 각 내부 노드에 정확히 4개의 자식이 있는 트리 데이터 구조이다.
+2차원 공간을 재귀적으로 4개의 영역으로 분할하는 데 사용된다.
+
+[참고](https://dev-nicitis.tistory.com/53) 
+
+### 게임 수학: 게임에서의 벡터, 행렬, 내적, 외적의 활용, 회전의 표현
+
+가장 약한 부분.. 최대한 OpenGL의 기억을 살려서 공부
+
+- [OpenGl 정리](https://github.com/fkdl0048/Computer_Graphics/blob/main/Integration/LectrureNote.md)
+- [벡터](http://rapapa.net/?p=2974)
+
+#### 게임에서의 벡터
+
+- 정리, 공부
+- [벡터 정리 1](https://gnaseel.tistory.com/18)
+- 
+
+### 언리얼 C++ 프로그래밍: 언리얼 엔진에서 사용하는 C++ 프로그래밍 프레임웤
+
+- [참고](https://trialdeveloper.tistory.com/79)
+- [후기](https://doobudubu.tistory.com/340)
+
+### 언리얼 게임 프레임웤: 언리얼 엔진이 게임 제작을 위해 제공하는 프레임웤에 대한 기초 지식
 
