@@ -1913,12 +1913,203 @@ Utility System은 잠재적인 행동의 선호도를 결정한다. 고려사항
 
 - [OpenGl 정리](https://github.com/fkdl0048/Computer_Graphics/blob/main/Integration/LectrureNote.md)
 - [벡터](http://rapapa.net/?p=2974)
+- [벡터 정리 1](https://gnaseel.tistory.com/18)
+- [유튜브 추천](https://www.youtube.com/watch?v=P3U9DXFp9SA&list=PL-xqYJ8bjgMC-p94R7iXjFCs-znRg93PJ&index=12)
 
 #### 게임에서의 벡터
 
-- 정리, 공부
-- [벡터 정리 1](https://gnaseel.tistory.com/18)
-- 
+[영상 참고](https://www.youtube.com/watch?v=va6eKs7db4s&t=99s)
+
+벡터는 게임 개발에서 중요한 개념으로 사용된다.
+
+- 크기와 방향으로 정의되는 값
+- 방향/거리/속도, 위치를 나타내기 위한 수학적 도구
+
+*스칼라는 크기*
+
+##### 표현
+
+- 시점, 종점으로 표현
+- 크기가 존재, 방향이 존재
+
+##### 성질
+
+- 크기와 방향이 동일하면 동일한 벡터로 취급
+- 임의의 벡터 공간에서, 한 벡터와 동일한 벡터는 무수히 많다.
+
+##### 상대좌표, 절대좌표
+
+- 상대좌표: 원점을 기준으로 한 좌표
+- 절대좌표: 절대적인 좌표
+  - 벡터 공간내에서 모든 벡터의 시점을 일치시킨다면, 임의의 벡터는 존재하지 않는다. (종점과 일대일 대응된다. 위치벡터)
+
+##### 벡터의 덧셈
+
+각 피연산자들의 성분끼리 더한다.
+
+$$ \vec{a} + \vec{b} = \vec{c} $$
+$$ \vec{a}(1,4) + \vec{b}(3,2) = \vec{c}(4,6) $$
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/57b9cce0-694d-49e5-89e8-e4be88239e14)
+
+
+##### 벡터의 뺄셈
+
+각 피연산자들의 성분끼리 뺀다.
+
+$$ \vec{a} - \vec{b} = \vec{c} $$
+$$ \vec{a}(1,4) - \vec{b}(3,2) = \vec{c}(-2,2) $$
+
+벡터의 뺄셈은 벡터 더하기 마이너스 벡터로 표현할 수 있다.
+
+##### 벡터의 스칼라 곱
+
+*벡터의 실수배*
+
+각 성분에 스칼라를 곱한다.
+
+$$ k\vec{a} = \vec{c} $$
+$$ 3\vec{a}(1,4) = \vec{c}(3,12) $$
+
+##### 방향벡터
+
+벡터를 통해 방향과 거리를 포현하는 경우 상당히 비직관저임
+
+따라서 방향*거리로 쪼개어 표현하는 것이 직관적임
+
+방향을 표현하는 벡터를 방향벡터라고 한다. (크기가 1인 벡터)
+
+방향 x 크기 = 벡터
+
+방향벡터를 구하는 방법
+
+- 벡터를 크기로 나눈다.
+- 단위벡터를 구한다.
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/c125d95e-61dd-43ee-a10c-66b73343ad89)
+
+크기를 구하는 방법
+
+- 벡터의 각 성분을 제곱하여 더한 후 제곱근을 취한다.
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/d9a168e9-7e2a-45aa-b68d-dfd18a0105f0)
+
+(3,-4, 0)
+
+$$ \sqrt{3^2 + (-4)^2 + 0^2} = 5 $$
+$$ \frac{1}{5}(3,-4,0) = (0.6, -0.8, 0) $$
+
+##### 벡터의 내적
+
+두 벡터가 이루는 각을 구하려면 내적을 사용한다.
+
+벡터의 내적은 한 벡터를 다른 벡터에 투영시켜 그 크기를 곱하는 연산
+
+$$ \vec{a} \cdot \vec{b} = |\vec{a}||\vec{b}|cos\theta $$
+$$ \vec{a} \cdot \vec{b} = a_xb_x + a_yb_y + a_zb_z $$
+$$ \frac{\vec{a} \cdot \vec{b}}{|\vec{a}||\vec{b}|} = cos\theta $$
+
+- 성질
+  - 두 벡터가 서로 수직이면 내적의 결과는 0이다.
+  - 내적의 결과는 스칼라이다.
+  - 교환/분배가 성립한다.
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/84627079-3c70-48cf-a6e6-5b4cb48a56b6)
+
+cosangle구하는 법
+
+내적은 벡터의 곱셉 하지만 값은 스칼라
+
+내적의 값이 0이라면 두 벡터는 수직이다.
+
+내적의 값이 양수라면 0도와 90도 사이에 있다. (1)
+즉, 두 벡터가 같은 방향을 가지고 있다.
+
+내적의 값이 음수라면 90도와 180도 사이에 있다. (-1)
+즉, 두 벡터가 반대 방향을 가지고 있다.
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/8c6078ca-b5a4-404b-9e7c-9d758215ac84)
+
+총알의 진행 방향과, 현재 뱡향의 내적이 0 초과라면 데미지를 입는다. 즉 같은 방향을 가진다면 데미지를 입는다.
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/9d7c04a2-add0-43f4-913d-59e687a57cda)
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/6a98199e-3b99-443e-97dc-57c34cb3555d)
+
+에너지 총량의 법칙 때문에 빛이 닿는 면적의 밝기는 코사인 세타이다.
+
+45도는 약 0.7정도로 나옴(코사인 45도)
+
+##### 벡터의 외적
+
+- 벡터의 외적은 두 벡터를 모두 수직으로 통과하는 벡터를 구하는 연산
+- 벡터곱 또는 교차연산으로 부르기도 한다.
+
+$$ \vec{a} \times \vec{b} = |\vec{a}||\vec{b}|sin\theta $$
+$$ \vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x) $$
+
+- 성질
+  - 두 벡터를 외적한 벡터의 크기는 두 벡터가 이루는 평행사변형의 넓이와 같다.
+  - 외적의 결과는 벡터이다.
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/7ffece0a-e493-42c6-b492-806e49d803bf)
+
+frontDirection은 현재 면의 앞을 가리키는 벡터이다.
+
+sinagngle은 두 벡터가 이루는 각도이다.
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/e1a99eef-9fa2-49c0-8ffe-032f409fe256)
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/3fd58e41-75c8-43f4-a92b-e4adb4fd818b)
+
+
+
+
+#### 회전
+
+3차원 벡터를 사용하여 회전을 나타내는 방법을 오일러 각이라고 한다.
+
+짐벌락 문제가 발생한다.
+
+한 차원이 자유도를 잃는 상황
+
+따라서 쿼터니언을 사용한다.
+
+- 4개의 원소를 이용해 회전을 나타내는 방법
+
+$$ q = w + xi + yj + zk $$
+
+오일러각은 순차적인 회전이 반면, 쿼터니언은 N차원 공간상에서 한 번에 회전한다.
+
+대신 계산이 매우 복잡함
+
+따라서 헬퍼함수를 사용하여 쿼터니언에 접근한다.
+
+쿼터니언 회전의 추가는 곱셈으로 구현
+
+이유는 행렬연산으로 이뤄지기 때문에 곱셈으로 구현
+
+#### 행렬
+
+행과 열로 이뤄진 수의 집합
+
+유니티의 Transform은 행렬로 이뤄져있다.
+
+행렬으로 회전, 이동, 크기 조절을 한다.
+
+이는 행렬의 곱셈으로 이뤄지는데, 이 곱셈은 내적이다. (선형대수학)
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/ff178b51-9c6e-4001-8ddc-f6badfab19da)
+
+3차원을 다루기 위해선 4차원 행렬을 사용한다. (그래픽스는 Column Major)
+
+1열은 x축, 2열은 y축, 3열은 z축, 4열은 이동을 나타낸다.
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/5b555a35-d022-4e23-bc20-c4a187feea7e)
+
+![image](https://github.com/fkdl0048/CodeReview/assets/84510455/0f3bdc6d-2a72-4736-8e2d-b5c0212d825d)
+
+행렬식은 변환의 크기를 나타낸다.
 
 ### 언리얼 C++ 프로그래밍: 언리얼 엔진에서 사용하는 C++ 프로그래밍 프레임웤
 
