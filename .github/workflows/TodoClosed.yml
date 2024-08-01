@@ -23,7 +23,7 @@ jobs:
           ISSUE_USER="${{ github.event.issue.user.login }}"
           
           # 파일명으로 사용할 수 없는 문자 제거 및 변환
-          SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | sed 's/[[:space:]]/-/g' | sed 's/[^a-zA-Z0-9가-힣-]//g')
+          SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | tr ' ' '-' | tr -cd 'a-zA-Z0-9가-힣-')
           
           # 만약 SANITIZED_ISSUE_TITLE이 비어있다면 기본값 사용
           if [ -z "$SANITIZED_ISSUE_TITLE" ]; then
