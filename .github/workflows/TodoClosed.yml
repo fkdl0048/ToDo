@@ -28,7 +28,7 @@ jobs:
           ISSUE_USER=${{ github.event.issue.user.login }}
           
           # 파일명으로 사용할 수 없는 문자 제거 및 변환
-          SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | iconv -f utf-8 -t ascii//TRANSLIT | tr -d '[:punct:]' | tr ' ' '-')
+          SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | tr -d '[:punct:]' | tr ' ' '-')
           FILE_NAME="TodoList/${SANITIZED_ISSUE_TITLE}.md"
           
           mkdir -p TodoList
