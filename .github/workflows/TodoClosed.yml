@@ -24,6 +24,12 @@ jobs:
           
           # 파일명으로 사용할 수 없는 문자 제거 및 변환
           SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | sed 's/[^a-zA-Z0-9가-힣]/-/g' | tr -s '-' | sed 's/^-//' | sed 's/-$//')
+          
+          # 만약 SANITIZED_ISSUE_TITLE이 비어있다면 기본값 사용
+          if [ -z "$SANITIZED_ISSUE_TITLE" ]; then
+            SANITIZED_ISSUE_TITLE="issue-${ISSUE_NUMBER}"
+          fi
+          
           FILE_NAME="TodoList/${SANITIZED_ISSUE_TITLE}.md"
           
           mkdir -p TodoList
@@ -32,6 +38,8 @@ jobs:
           echo "## Created by: ${ISSUE_USER}" >> "$FILE_NAME"
           echo "" >> "$FILE_NAME"
           echo "${ISSUE_BODY}" >> "$FILE_NAME"
+          
+          echo "Created file: $FILE_NAME"
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
