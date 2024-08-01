@@ -26,8 +26,11 @@ jobs:
           ISSUE_TITLE=${{ github.event.issue.title }}
           ISSUE_BODY=${{ github.event.issue.body }}
           ISSUE_USER=${{ github.event.issue.user.login }}
-          FILE_NAME="issue-${ISSUE_NUMBER}.md"
+          # 이슈 제목에서 파일명으로 사용할 수 없는 문자 제거
+          SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | tr -d '[:punct:]' | tr ' ' '-')
+          FILE_NAME="TodoList/${SANITIZED_ISSUE_TITLE}.md"
           
+          mkdir -p TodoList
           echo "# Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}" > $FILE_NAME
           echo "" >> $FILE_NAME
           echo "## Created by: ${ISSUE_USER}" >> $FILE_NAME
