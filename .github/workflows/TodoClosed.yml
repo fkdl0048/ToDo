@@ -1,43 +1,37 @@
 name: Issue Closed
-
 on:
   issues:
     types: [closed]
-
 jobs:
   create-md:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
       - name: Create issue markdown file
         run: |
-          ISSUE_NUMBER=${{ github.event.issue.number }}
-          ISSUE_TITLE=${{ github.event.issue.title }}
-          ISSUE_BODY=${{ github.event.issue.body }}
-          ISSUE_USER=${{ github.event.issue.user.login }}
+          ISSUE_NUMBER="${{ github.event.issue.number }}"
+          ISSUE_TITLE="${{ github.event.issue.title }}"
+          ISSUE_BODY="${{ github.event.issue.body }}"
+          ISSUE_USER="${{ github.event.issue.user.login }}"
           
           # 파일명으로 사용할 수 없는 문자 제거 및 변환
-          SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | tr -d '[:punct:]' | tr ' ' '-')
+          SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | sed 's/[^a-zA-Z0-9가-힣]/-/g' | tr -s '-' | sed 's/^-//' | sed 's/-$//')
           FILE_NAME="TodoList/${SANITIZED_ISSUE_TITLE}.md"
           
           mkdir -p TodoList
-          echo "# Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}" > $FILE_NAME
-          echo "" >> $FILE_NAME
-          echo "## Created by: ${ISSUE_USER}" >> $FILE_NAME
-          echo "" >> $FILE_NAME
-          echo "${ISSUE_BODY}" >> $FILE_NAME
-
+          echo "# Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}" > "$FILE_NAME"
+          echo "" >> "$FILE_NAME"
+          echo "## Created by: ${ISSUE_USER}" >> "$FILE_NAME"
+          echo "" >> "$FILE_NAME"
+          echo "${ISSUE_BODY}" >> "$FILE_NAME"
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
