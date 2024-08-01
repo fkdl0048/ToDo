@@ -1,0 +1,15 @@
+name: Issue Closed
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Send notification
+        run: echo "An issue has been closed!"
