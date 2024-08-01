@@ -5,11 +5,46 @@ on:
     types: [closed]
 
 jobs:
-  notify:
+  create-md:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Send notification
-        run: echo "An issue has been closed!"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+
+      - name: Create issue markdown file
+        run: |
+          ISSUE_NUMBER=${{ github.event.issue.number }}
+          ISSUE_TITLE=${{ github.event.issue.title }}
+          ISSUE_BODY=${{ github.event.issue.body }}
+          ISSUE_USER=${{ github.event.issue.user.login }}
+          FILE_NAME="issue-${ISSUE_NUMBER}.md"
+          
+          echo "# Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}" > $FILE_NAME
+          echo "" >> $FILE_NAME
+          echo "## Created by: ${ISSUE_USER}" >> $FILE_NAME
+          echo "" >> $FILE_NAME
+          echo "${ISSUE_BODY}" >> $FILE_NAME
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -b issue-to-md
+          git add .
+          git commit -m "Add markdown file for closed issue #${ISSUE_NUMBER}"
+          git push origin issue-to-md
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: issue-to-md
+          title: 'Add markdown file for closed issue'
+          body: 'This PR adds a markdown file for the closed issue #${ISSUE_NUMBER}.'
+          base: main
