@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -35,16 +38,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git checkout -b issue-to-md
           git add .
           git commit -m "Add markdown file for closed issue #${ISSUE_NUMBER}"
-          git push origin issue-to-md
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: issue-to-md
-          title: 'Add markdown file for closed issue'
-          body: 'This PR adds a markdown file for the closed issue #${ISSUE_NUMBER}.'
-          base: main
+          git pull --rebase origin main
+          git push origin main
