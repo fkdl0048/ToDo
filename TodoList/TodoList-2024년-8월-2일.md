@@ -1,7 +1,5 @@
 # Issue #789: TodoList 2024년 8월 2일
 
-## Created by: github-actions[bot]
-
 # TodoList
 
 1. 진행상황은 Comment로 남길 것
@@ -39,4 +37,8 @@
 ### Comment by fkdl0048 on 2024-08-02T12:19:32Z
 
 코멘트 테스트
+
+### Comment by fkdl0048 on 2024-08-02T12:21:55Z
+
+테스트 2
 
