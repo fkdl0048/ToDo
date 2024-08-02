@@ -38,8 +38,6 @@ jobs:
           mkdir -p TodoList
           echo "# Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}" > "$FILE_NAME"
           echo "" >> "$FILE_NAME"
-          echo "## Created by: ${ISSUE_USER}" >> "$FILE_NAME"
-          echo "" >> "$FILE_NAME"
           echo "${ISSUE_BODY}" >> "$FILE_NAME"
           echo "" >> "$FILE_NAME"
           echo "## Comments" >> "$FILE_NAME"
