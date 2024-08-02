@@ -16,11 +16,14 @@ jobs:
         with:
           node-version: '20'
       - name: Create issue markdown file
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ISSUE_NUMBER="${{ github.event.issue.number }}"
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
           ISSUE_USER="${{ github.event.issue.user.login }}"
+          REPO_FULL_NAME="${{ github.repository }}"
           
           # 파일명으로 사용할 수 없는 문자 제거 및 변환
           SANITIZED_ISSUE_TITLE=$(echo "${ISSUE_TITLE}" | tr ' ' '-' | tr -cd 'a-zA-Z0-9가-힣-')
@@ -38,6 +41,16 @@ jobs:
           echo "## Created by: ${ISSUE_USER}" >> "$FILE_NAME"
           echo "" >> "$FILE_NAME"
           echo "${ISSUE_BODY}" >> "$FILE_NAME"
+          echo "" >> "$FILE_NAME"
+          echo "## Comments" >> "$FILE_NAME"
+          echo "" >> "$FILE_NAME"
+          
+          # 이슈의 코멘트 가져오기
+          COMMENTS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${REPO_FULL_NAME}/issues/${ISSUE_NUMBER}/comments")
+          
+          # 각 코멘트를 파일에 추가
+          echo "$COMMENTS" | jq -r '.[] | "### Comment by " + .user.login + " on " + .created_at + "\n\n" + .body + "\n"' >> "$FILE_NAME"
           
           echo "Created file: $FILE_NAME"
       - name: Commit and push changes
