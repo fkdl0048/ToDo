@@ -32,9 +32,9 @@
 
 - [x] 수민님 인터뷰 [21:00]
 - [x] https://github.com/GG-Studio-990001/Grayed-Game/issues/740
-- [ ] https://github.com/fkdl0048/merchants-journey/issues/2
-- [ ] GG 프로젝트 업데이트 (영상, 구드)
-- [ ] 스팀페이지 올리기
+- [x] https://github.com/fkdl0048/merchants-journey/issues/2
+- [x] GG 프로젝트 업데이트 (영상, 구드)
+- [x] 스팀페이지 올리기
 
 ### Books
 
@@ -82,4 +82,8 @@
 - https://github.com/fkdl0048/Algorithm/issues/192
 - https://github.com/fkdl0048/Algorithm/issues/193
 - https://github.com/fkdl0048/Algorithm/issues/194
+
+### Comment by fkdl0048 on 2024-11-05T18:40:23Z
+
+영어 졸업인증
 
