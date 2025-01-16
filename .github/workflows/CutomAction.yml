@@ -18,6 +18,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
         run: |
-          gh issue edit $ISSUE_URL --milestone "2023"
+          gh issue edit $ISSUE_URL --milestone "2025"
           
         
