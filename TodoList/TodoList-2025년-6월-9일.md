@@ -6,6 +6,10 @@
 
 ### Todo  
 
+- [x] github Todo Issue 정리
+- [x] 아카데미 컨퍼런스 일정 정리
+- [x] 북클럽 일정 정리
+
 ### Lecture
 
 ### Projects
