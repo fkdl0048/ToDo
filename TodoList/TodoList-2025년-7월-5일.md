@@ -12,10 +12,11 @@
 
 ### Books
 
+*정리 못한 내용 정리*
+- [ ] https://github.com/fkdl0048/BookReview/issues/402
+- [ ] https://github.com/fkdl0048/BookReview/issues/405
+- [ ] https://github.com/fkdl0048/BookReview/issues/403
+
 
 ## Comments
-
-### Comment by fkdl0048 on 2025-07-05T05:02:52Z
-
-Closed in batch via CLI
 
